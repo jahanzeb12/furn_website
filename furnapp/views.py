@@ -21,6 +21,9 @@ def about(request):
 def contact(request):
     return render(request,'furnapp/contact.html')
 
+def productsdet(request):
+    return render(request,'furnapp/product_details.html')
+
 def loginpage(request):
     
     if request.method=='POST':
