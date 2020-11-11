@@ -7,3 +7,5 @@ admin.site.register(product)
 admin.site.register(review)
 admin.site.register(ordered_item)
 admin.site.register(category)
+fields = ['image_tag']
+readonly_fields = ['image_tag']

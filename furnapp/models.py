@@ -41,7 +41,9 @@ class product(models.Model):
     title=models.CharField(max_length=50,null=True)
     price=models.IntegerField()
     description=models.CharField(max_length=200,null=True)
-    #image=
+    image = models.FileField(upload_to='static/img/gallery',blank=True)
+
+    
 
 class category(models.Model):
     product_id=models.ForeignKey(product,on_delete=models.CASCADE)
