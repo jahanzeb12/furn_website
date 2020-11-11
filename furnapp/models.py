@@ -43,7 +43,7 @@ class product(models.Model):
     title=models.CharField(max_length=50,null=True)
     price=models.IntegerField()
     description=models.CharField(max_length=200,null=True)
-    image = models.FileField(upload_to='static/img/gallery',blank=True)
+    image = models.ImageField(upload_to='static/img/gallery',blank=True)
     def __str__(self):
         return self.title
 
@@ -51,7 +51,8 @@ class product(models.Model):
 
 class category(models.Model):
     product_id=models.ForeignKey(product,on_delete=models.CASCADE)
-    category_name=(('sofa','sofa'))
+    category_name=(('sofa','sofa'),('beds','single beds'),('beds','double beds'),('side tables','side tables'),('wardrobe','single wardrobe'),
+    ('wardrobe','double wardrobe'),(''))
     def __str__(self):
         return self.product_id
 
