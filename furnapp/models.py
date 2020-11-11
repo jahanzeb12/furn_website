@@ -17,9 +17,41 @@ class customer(models.Model):
         return self.user_name
 class order(models.Model):
     customer_id=models.ForeignKey(customer,on_delete=models.CASCADE)
-    Status= (('accepted','not accepted'),('delivered','on process'))
+    Status= (('accepted','accepted'),('not accepted','not accepted'),('delivered','delivered'),('on process','on process'))
     status=models.CharField(max_length=20,null= True,choices=Status)
     delivery_address=models.CharField(max_length=100,null=True)
     total_bill=models.IntegerField(null=True)
     order_num=models.IntegerField(unique=True)
+    def __str__(self):
+        return self.customer_id
+
+class ordered_item(models.Model):
+    order_number=models.ForeignKey(order,on_delete=models.CASCADE)
+    #product_id=
+    quantity=models.IntegerField()
+    def __str__(self):
+        return self.order_number
+class review(models.Model):
+    comment=models.CharField(max_length=200,null=True)
+    #rating=
+    customer_id=models.ForeignKey(customer,on_delete=models.CASCADE)
+
+class product(models.Model):
+    product_id=models.CharField(max_length=200,null=True,unique=True)
+    title=models.CharField(max_length=50,null=True)
+    price=models.IntegerField()
+    description=models.CharField(max_length=200,null=True)
+    #image=
+
+class category(models.Model):
+    product_id=models.ForeignKey(product,on_delete=models.CASCADE)
+    category_name=(('sofa','sofa'))
+
+class cart(models.Model):
+    product_id=models.ManyToManyField(product)
+    customer_id=models.ForeignKey(customer,on_delete=models.CASCADE)
+    total_price=models.IntegerField()
+    quantity=models.IntegerField()
+
+
 
