@@ -35,6 +35,8 @@ class review(models.Model):
     comment=models.CharField(max_length=200,null=True)
     #rating=
     customer_id=models.ForeignKey(customer,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.customer_id
 
 class product(models.Model):
     product_id=models.CharField(max_length=200,null=True,unique=True)
@@ -42,18 +44,24 @@ class product(models.Model):
     price=models.IntegerField()
     description=models.CharField(max_length=200,null=True)
     image = models.FileField(upload_to='static/img/gallery',blank=True)
+    def __str__(self):
+        return self.title
 
     
 
 class category(models.Model):
     product_id=models.ForeignKey(product,on_delete=models.CASCADE)
     category_name=(('sofa','sofa'))
+    def __str__(self):
+        return self.product_id
 
 class cart(models.Model):
     product_id=models.ManyToManyField(product)
     customer_id=models.ForeignKey(customer,on_delete=models.CASCADE)
     total_price=models.IntegerField()
     quantity=models.IntegerField()
+    def __str__(self):
+        return self.customer_id
 
 
 
