@@ -14,6 +14,7 @@ urlpatterns = [
     path('products/', views.products,name="product"),
     path('about/', views.about,name="aboutus"),
     path('contact/', views.contact,name="contact"),
+    path('product-details/', views.productsdet,name="productsdet"),
     
     path('register/', views.register,name="register"),
     path('login/',LoginView.as_view(template_name="furnapp/login.html",form_class=CustomLoginForm),name="login"),
