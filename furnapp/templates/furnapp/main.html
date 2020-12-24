@@ -1,6 +1,7 @@
 {% load static %}
 <!doctype html>
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -27,8 +28,9 @@
     <link rel="stylesheet" href="{% static 'css/slick.css'%}">
     <link rel="stylesheet" href="{% static 'css/nice-select.css'%}">
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
-    
+
 </head>
+
 <body>
     <!-- ? Preloader Start -->
 
@@ -56,31 +58,39 @@
                             </div>
                             <!-- Logo-2 -->
                             <div class="logo2">
-                                <a href="{% url 'furnapp:main'%}"><img src="{% static 'img/logo/logo2.png'%}" alt=""></a>
+                                <a href="{% url 'furnapp:main'%}"><img src="{% static 'img/logo/logo2.png'%}"
+                                        alt=""></a>
                             </div>
                             <!-- Main-menu -->
                             <div class="main-menu d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="{%url 'furnapp:main' %}">Home</a></li> 
-                                        <li><a href="{%url 'furnapp:product' %}">Product</a>
-                                            <ul class="submenu">
-                                                <li><a href="{%url 'furnapp:productsdet' %}">Product Details</a></li>
-                                            </ul>
+                                        <li><a href="{%url 'furnapp:main' %}">Home</a></li>
+                                        
+                                            <li><a href="{%url 'furnapp:product' %}">Product</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{%url 'furnapp:category' '1' %}">Sofa</a></li>
+                                                    <li><a href="{%url 'furnapp:category' '5' %}">Table</a></li>
+                                                    <li><a href="{%url 'furnapp:category' '4' %}">Chair</a></li>
+                                                    <li><a href="{%url 'furnapp:category' '3' %}">Bed</a></li>
+                                                    <li><a href="{%url 'furnapp:category' '6' %}">Wardrobe</a></li>
+                                                    <li><a href="{%url 'furnapp:category' '7' %}">Lightning</a></li>
+                                                </ul>
+                                            
                                         </li>
-                                        <li><a href="{% url 'furnapp:aboutus' %}">About</a></li>    
+                                        <li><a href="{% url 'furnapp:aboutus' %}">About</a></li>
                                         <li><a href="{% url 'furnapp:contact' %}">Contact</a></li>
                                     </ul>
                                 </nav>
-                            </div>   
+                            </div>
                         </div>
                         <div class="header-right1 d-flex align-items-center">
                             <div class="search">
                                 <ul class="d-flex align-items-center">
                                     <li>
                                         <!-- Search Box -->
-                                        <form action="#" class="form-box f-right ">
-                                            <input type="text" name="Search" placeholder="Search products">
+                                        <form method="get" action="{% url 'furnapp:search'%}" class="form-box f-right ">
+                                            <input type="text" name="search" id="search" placeholder="Search products">
                                             <div class="search-icon">
                                                 <i class="ti-search"></i>
                                             </div>
@@ -88,7 +98,7 @@
                                     </li>
                                     <li>
                                         {% if user.is_authenticated %}
-                                        <p style="margin-right: 30px !important;margin-left: 50px !important; padding-top: 20px; font-weight:bold; color: black;" >Welcome, {{ user.username }}</p>
+                                        <p style="margin-right: 30px !important;margin-left: 30px !important; padding-top: 20px; font-weight:bold; color: black;"> Welcome, <span style="font-weight:bold; color:#FF7F50;"> {{ user.username }}</span></p>
                                         <li><a style="margin-right: 30px !important;color: black;" href="{% url 'furnapp:logout' %}">logout</a></li>
                                         {% else %}
                                         <a href="{% url 'furnapp:login' %}" class="account-btn">My Account</a>
@@ -96,8 +106,9 @@
                                     </li>
                                     <li>
                                         <div class="card-stor">
-                                            <img src="{% static 'img/icon/card.svg'%}" alt="">
-                                            <span>0</span>
+                                           <a href="{% url 'furnapp:cart' %}">
+                                                <img src="{% static 'img/icon/card.svg'%}" alt=""></a>
+                                            <span>{{cartitems}}</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -113,83 +124,138 @@
         </div>
         <!-- Header End -->
     </header>
-    
-   {% block content %}
+
+    {% block content %}
 
 
 
-   {% endblock %}
+    {% endblock %}
 
     <!-- <footer> hai ye-->
-<div class="container-fluid" style="background-color: #000045;">
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12" style="display: flex !important;justify-content: center !important; align-items: center !important;" >
-            <div class="footer-logo mb-20">
-                <br>
-                <a href="{% url 'furnapp:main'%}"><img src="{% static 'img/logo/logo2_footer.png' %}" alt=""></a>
+    <div class="container-fluid" style="background-color: #000045;">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12"
+                style="display: flex !important;justify-content: center !important; align-items: center !important;">
+                <div class="footer-logo mb-20">
+                    <br>
+                    <a href="{% url 'furnapp:main'%}"><img src="{% static 'img/logo/logo2_footer.png' %}" alt=""></a>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12" style="display: flex !important;justify-content: center !important; align-items: center !important;">
-            <div class="footer-copy-right" style="color: antiquewhite;">
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved.
+            <div class="col-lg-4 col-md-4 col-sm-12"
+                style="display: flex !important;justify-content: center !important; align-items: center !important;">
+                <div class="footer-copy-right" style="color: antiquewhite;">
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved.
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12" style="display: flex !important;justify-content: center !important; align-items: center !important;">
-            <div class="footer-social mt-20 mb-20">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+            <div class="col-lg-4 col-md-4 col-sm-12"
+                style="display: flex !important;justify-content: center !important; align-items: center !important;">
+                <div class="footer-social mt-20 mb-20">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- </footer> -->
+    <!-- </footer> -->
 
 
-<!-- Scroll Up -->
-<div id="back-top" >
-    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-</div>
+    <!-- Scroll Up -->
+    <div id="back-top">
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
 
-<!-- JS here -->
-<!-- Jquery, Popper, Bootstrap -->
-<script src="{% static 'js/vendor/modernizr-3.5.0.min.js'%}"></script>
-<script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
-<script src="{% static 'js/popper.min.js'%}"></script>
-<script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <!-- JS here -->
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js'%}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/cartt.js'%}"></script>
+    <script text="text/javascript">
+        var user = '{{request.user}}'
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+        function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
 
-<!-- Slick-slider , Owl-Carousel ,slick-nav -->
-<script src="{% static 'js/owl.carousel.min.js'%}"></script>
-<script src="{% static 'js/slick.min.js'%}"></script>
-<script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
 
-<!-- One Page, Animated-HeadLin, Date Picker , price, light-slider -->
-<script src="{% static 'js/wow.min.js'%}"></script>
-<script src="{% static 'js/animated.headline.js'%}"></script>
-<script src="{% static 'js/jquery.magnific-popup.js'%}"></script>
-<script src="{% static 'js/gijgo.min.js'%}"></script>
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
 
-<!-- Nice-select, sticky,Progress -->
-<script src="{% static 'js/jquery.nice-select.min.js'%}"></script>
-<script src="{% static 'js/jquery.sticky.js'%}"></script>
-<script src="{% static 'js/jquery.barfiller.js'%}"></script>
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
 
-<!-- counter , waypoint,Hover Direction -->
-<script src="{% static 'js/jquery.counterup.min.js'%}"></script>
-<script src="{% static 'js/waypoints.min.js'%} "></script>
-<script src="{% static 'js/jquery.countdown.min.js' %}"></script>
-<script src="{% static 'js/hover-direction-snake.min.js' %}"></script>
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+        
 
-<!-- contact js -->
-<script src="{% static 'js/contact.js'%}"></script>
-<script src="{% static 'js/jquery.form.js'%}"></script>
-<script src="{% static 'js/jquery.validate.min.js'%}"></script>
-<script src="{% static 'js/mail-script.js' %}"></script>
-<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    </script>
 
-<!-- Jquery Plugins, main Jquery -->	
-<script src="{% static 'js/plugins.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
+    <!-- Slick-slider , Owl-Carousel ,slick-nav -->
+    <script src="{% static 'js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'js/slick.min.js'%}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
+
+    <!-- One Page, Animated-HeadLin, Date Picker , price, light-slider -->
+    <script src="{% static 'js/wow.min.js'%}"></script>
+    <script src="{% static 'js/animated.headline.js'%}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.js'%}"></script>
+    <script src="{% static 'js/gijgo.min.js'%}"></script>
+
+    <!-- Nice-select, sticky,Progress -->
+    <script src="{% static 'js/jquery.nice-select.min.js'%}"></script>
+    <script src="{% static 'js/jquery.sticky.js'%}"></script>
+    <script src="{% static 'js/jquery.barfiller.js'%}"></script>
+
+    <!-- counter , waypoint,Hover Direction -->
+    <script src="{% static 'js/jquery.counterup.min.js'%}"></script>
+    <script src="{% static 'js/waypoints.min.js'%} "></script>
+    <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/hover-direction-snake.min.js' %}"></script>
+
+    <!-- contact js -->
+    <script src="{% static 'js/contact.js'%}"></script>
+    <script src="{% static 'js/jquery.form.js'%}"></script>
+    <script src="{% static 'js/jquery.validate.min.js'%}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
 
 </body>
+
 </html>
